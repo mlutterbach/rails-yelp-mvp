@@ -5,3 +5,29 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Cleaning database..."
+Restaurant.destroy_all
+
+puts "Creating restaurants..."
+dishoom = { name: "Dishoom", address: "7 Boundary St, London E2 7JE", phone_number:"692 55 55 55 55", category: "chinese" }
+pizza_east = { name: "Pizza East", address: "56A Shoreditch High St, London E1 6PQ", phone_number:"692 55 55 55 55", category: "italian" }
+
+[dishoom, pizza_east].each do |attributes|
+  restaurant = Restaurant.create!(attributes)
+  puts "Created #{restaurant.name}"
+end
+puts "Finished!"
+
+puts "Cleaning database..."
+Review.destroy_all
+
+puts "Creating reviews..."
+dishoom_review = { content: "Very good", rating: 5, restaurant_id: 1 }
+pizza_east_review = { content: "not enough cheese", rating: 2, restaurant_id: 2 }
+
+[dishoom_review, pizza_east_review].each do |attributes|
+  review = Review.create!(attributes)
+  puts "Created #{review}"
+end
+puts "Finished!"

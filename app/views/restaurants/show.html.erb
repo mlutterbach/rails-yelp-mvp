@@ -1,0 +1,18 @@
+<h1>Restaurant <%= @restaurant.name%></h1>
+<h2>Category: <%= @restaurant.category %></h2>
+<h2>Phone number: <%= @restaurant.phone_number %></h2>
+<h2>Address: <%= @restaurant.address %></h2>
+
+<ul class="list-group">
+  <% if @restaurant.reviews.present? %>
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item"><%= review.content %></li>
+    <% end %>
+  <% else %>
+    <li>Be the first to review <%= @restaurant.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Delete", restaurant_path(@restaurant), method: :delete,  data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<%= link_to "All Restaurants", restaurants_path, class: "btn btn-primary" %>
+<%= link_to "Edit Restaurant", edit_restaurant_path, class: "btn btn-warning" %>
