@@ -1,18 +1,30 @@
-<h1>Restaurant <%= @restaurant.name%></h1>
-<h2>Category: <%= @restaurant.category %></h2>
-<h2>Phone number: <%= @restaurant.phone_number %></h2>
-<h2>Address: <%= @restaurant.address %></h2>
+<div class="container d-flex justify-content-center">
+  <!-- Content here -->
+  <div class="w-75 p-3">
+    <h1 class="text-center">Restaurant <%= @restaurant.name%></h1>
+    <h2 class="text-center">Category: <%= @restaurant.category.capitalize %></h2>
+    <h2 class="text-center">Phone number: <%= @restaurant.phone_number %></h2>
+    <h2 class="text-center">Address: <%= @restaurant.address %></h2>
 
-<ul class="list-group">
-  <% if @restaurant.reviews.present? %>
-    <% @restaurant.reviews.each do |review| %>
-      <li class="list-group-item"><%= review.content %></li>
-    <% end %>
-  <% else %>
-    <li>Be the first to review <%= @restaurant.name %></li>
-  <% end %>
-</ul>
+    <ul class="list-group ">
+      <% if @restaurant.reviews.present? %>
+        <% @restaurant.reviews.each do |review| %>
+          <li class="list-group-item"><%= review.content%>
+          <%= link_to review_path(review), method: :delete, data: { confirm: "Are you sure?" } do %>
+          <i class="fa-solid fa-delete-left"></i>
+          <% end %>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="text-center list-group-item">Be the first to review <%= @restaurant.name %></li>
+      <% end %>
+    </ul>
 
-<%= link_to "Delete", restaurant_path(@restaurant), method: :delete,  data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
-<%= link_to "All Restaurants", restaurants_path, class: "btn btn-primary" %>
-<%= link_to "Edit Restaurant", edit_restaurant_path, class: "btn btn-warning" %>
+  </div>
+</div>
+  <div class="container d-flex justify-content-around w-75 p-3">
+    <%= link_to "Delete", restaurant_path(@restaurant), method: :delete,  data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <%= link_to "Add a Review", new_restaurant_review_path(@restaurant), class: "btn btn-success" %>
+    <%= link_to "All Restaurants", restaurants_path, class: "btn btn-primary" %>
+    <%= link_to "Edit Restaurant", edit_restaurant_path, class: "btn btn-warning" %>
+  </div>
